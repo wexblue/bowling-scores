@@ -61,20 +61,48 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var scorebutton = document.querySelector('#scorebutton')
   addEvent(scorebutton, 'click', function(event) {
+    var scores = []
     var totalscore = 0
     for (var i = 1; i < 21; i++) {
       var elementid = "#tb" + i
       var el = document.querySelector(elementid);
-     
-      var n= parseInt(el.value,10)
-      if (!isNaN(n)){
-          totalscore+=n;
-          }
+
+      var n = parseInt(el.value, 10)
+      if (!isNaN(n)) {
+        scores.push(n)
+      }
 
     }
     var total = document.querySelector('#tb21')
-    total.value=totalscore
+
+    for (let i = 0; i < scores.length; i++) {
+
+      let tempScore = scores[i];
+
+      if (tempScore === 10) {
+
+        if (scores.length === (i + 1)) {
+
+          console.log('..need more scores')
+
+          break;
+        }
+        totalscore += scores[i];
+        totalscore += scores[i + 1];
+        totalscore += scores[i + 2];
+      } else {
+        totalscore += scores[i]
+
+      }
+
+
+
+    }
+    total.value = totalscore
   });
 
 
 });
+
+
+
